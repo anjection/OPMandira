@@ -54,16 +54,27 @@ export default function Home() {
           </motion.div>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest">
-            {['Menu', 'About', 'Gallery', 'Contact'].map((item, i) => (
+            {[
+              { name: 'Menu', href: '#menu' },
+              { name: 'About', href: '#about' },
+              { name: 'Gallery', href: '#gallery' },
+              { name: 'Contact', href: '#contact' }
+            ].map((item, i) => (
               <motion.a
-                key={item}
+                key={item.name}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                href={`#${item.toLowerCase()}`}
+                href={item.href}
                 className="hover:text-amber-700 transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(item.href)?.scrollIntoView({
+                    behavior: 'smooth'
+                  });
+                }}
               >
-                {item}
+                {item.name}
               </motion.a>
             ))}
           </div>
@@ -122,11 +133,25 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="flex flex-wrap gap-4"
             >
-              <a href="#menu" className="group bg-amber-900 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-amber-800 transition-all shadow-xl shadow-amber-900/30">
+              <a
+                href="#menu"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#menu')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="group bg-amber-900 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-amber-800 transition-all shadow-xl shadow-amber-900/30"
+              >
                 View Our Menu
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="#instagram" className="px-8 py-4 rounded-full font-semibold border-2 border-stone-200 hover:border-amber-900 hover:text-amber-900 transition-all">
+              <a
+                href="#instagram"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#instagram')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-8 py-4 rounded-full font-semibold border-2 border-stone-200 hover:border-amber-900 hover:text-amber-900 transition-all"
+              >
                 Our Story
               </a>
             </motion.div>
@@ -229,8 +254,8 @@ export default function Home() {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-8 py-3 rounded-full text-sm font-bold transition-all flex items-center gap-2 ${activeCategory === cat.id
-                    ? 'bg-amber-900 text-white shadow-lg shadow-amber-900/20'
-                    : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+                  ? 'bg-amber-900 text-white shadow-lg shadow-amber-900/20'
+                  : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
                   }`}
               >
                 <span>{cat.icon}</span>
@@ -407,8 +432,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instagram Story Section */}
-      <section id="instagram" className="py-24 bg-stone-900 text-white overflow-hidden">
+      {/* Instagram Story Section / Gallery */}
+      <section id="gallery" className="py-24 bg-stone-900 text-white overflow-hidden">
+        <div id="instagram" className="absolute" /> {/* Secondary ID for instagram link */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
@@ -478,8 +504,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
+      {/* Footer / Contact */}
+      <footer id="contact" className="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div
             className="text-2xl font-bold tracking-[0.2em] text-white"
