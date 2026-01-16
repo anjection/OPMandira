@@ -1,0 +1,5 @@
+- **Immersive Hero Experience**: its call Mandira Cafe, A high-impact landing section featuring smooth entry animations, high-quality imagery of signature dishes, and a prominent call-to-action for reservations or online ordering.
+- **Interactive Digital Menu**: A dynamic, categorized showcase of food and beverage offerings with hover-responsive elements and detailed descriptions for each item.
+- **Animated Storytelling Section**: An engaging "About Us" area that uses scroll-triggered animations to reveal the cafe's history, philosophy, and unique atmosphere.
+- **Visual Gallery & Social Proof**: A fluid, animated gallery or slider displaying high-resolution photos of the cafe interior and customer testimonials to build brand trust.
+- **Dynamic Contact & Location Hub**: A comprehensive footer or section providing interactive location details, operating hours, and a stylized inquiry form for customer outreach.
