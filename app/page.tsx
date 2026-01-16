@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Utensils, ArrowRight, UtensilsCrossed, Clock, MapPin, Globe, Soup, ChevronRight, History, Heart, Users, Instagram, ExternalLink } from 'lucide-react';
+import { Utensils, ArrowRight, UtensilsCrossed, Clock, MapPin, Globe, Soup, ChevronRight, History, Heart, Users, Instagram, ExternalLink, Menu, X } from 'lucide-react';
 import { useState, useRef } from 'react';
 
 const MENU_CATEGORIES = [
@@ -30,6 +30,7 @@ const MENU_ITEMS = {
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('indonesian');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const aboutRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: aboutRef,
@@ -53,6 +54,7 @@ export default function Home() {
             MANDIRA
           </motion.div>
 
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest">
             {[
               { name: 'Menu', href: '#menu' },
@@ -85,11 +87,65 @@ export default function Home() {
             href="https://wa.me/6281234567890" // You can change this number
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-amber-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-amber-800 transition-all shadow-lg shadow-amber-900/20"
+            className="hidden md:block bg-amber-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-amber-800 transition-all shadow-lg shadow-amber-900/20"
           >
             Book a Table
           </motion.a>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2 text-stone-900"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white/95 backdrop-blur-md border-t border-stone-200 overflow-hidden"
+            >
+              <div className="p-6 flex flex-col gap-6">
+                {[
+                  { name: 'Menu', href: '#menu' },
+                  { name: 'About', href: '#about' },
+                  { name: 'Gallery', href: '#gallery' },
+                  { name: 'Contact', href: '#contact' }
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-stone-900 text-lg font-medium uppercase tracking-widest hover:text-amber-700 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMenuOpen(false);
+                      document.querySelector(item.href)?.scrollIntoView({
+                        behavior: 'smooth'
+                      });
+                    }}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+
+                <a
+                  href="https://wa.me/6281234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-amber-900 text-white px-6 py-4 rounded-full text-center text-sm font-medium uppercase tracking-widest hover:bg-amber-800 transition-all shadow-lg shadow-amber-900/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Book a Table
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
