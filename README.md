@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OPMandira Project Documentation
 
-## Getting Started
+This document provides step-by-step instructions on how to set up, run, build, and deploy the OPMandira restaurant landing page.
 
-First, run the development server:
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (Latest LTS recommended)
+- npm (installed by default with Node.js)
+
+### Installation
+1.  **Clone or Download** the repository to your local machine.
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+## 💻 Development
+
+To start the development server with Hot Module Replacement (HMR):
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Key Commands
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production (Static Export).
+- `npm run lint`: Checks for code quality issues.
+- `npm run type-check`: Validates TypeScript types.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Build Process
 
-To learn more about Next.js, take a look at the following resources:
+This project is configured for **Static Site Generation (SSG)**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Run Build**:
+    ```bash
+    npm run build
+    ```
+2.  **Output**:
+    The production-ready files will be generated in the `out/` directory. These are pure HTML/CSS/JS files that can be hosted anywhere.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🌐 Deployment (GitHub Pages)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is pre-configured to be hosted on GitHub Pages under the `/OPMandira` path.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Configuration
+If you change the repository name, you **must** update the `basePath` in `next.config.mjs`:
+```javascript
+// next.config.mjs
+const nextConfig = {
+  output: 'export',
+  basePath: '/YOUR_NEW_REPO_NAME', // Update this
+  // ...
+};
+```
+
+### Steps to Deploy
+1.  Ensure your code is pushed to a GitHub repository named `OPMandira`.
+2.  In GitHub: **Settings > Pages**.
+3.  Set **Build and deployment > Source** to **GitHub Actions**.
+4.  The site will automatically build and deploy whenever you push to the `main` branch.
+
+---
+
+## 🛠️ Tech Stack Analysis
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Backend (Optional)**: Supabase (Pre-configured client available in `lib/supabase`)
+- **Analytics**: PostHog
